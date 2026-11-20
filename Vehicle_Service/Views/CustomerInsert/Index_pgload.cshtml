@@ -1,0 +1,190 @@
+﻿
+@model Vehicle_Service.Models.Customer
+
+<style>
+
+    .registration-container {
+        width: 550px;
+        margin: 40px auto;
+        padding: 25px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background-color: honeydew;
+    }
+
+    .registration-title {
+        color: #008080;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+        .form-group label {
+            color: #008080;
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+    .my-input {
+
+        width: 100%;
+        box-sizing: border-box;
+        padding: 8px;
+        border: 1px solid green;
+        border-radius: 4px;
+    }
+
+        .my-input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+    .text-danger {
+        color: red;
+        font-size: 13px;
+    }
+
+    .register-button {
+        width: 100%;
+        padding: 9px;
+        background-color: #008080;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 15px;
+    }
+
+        .register-button:hover {
+            background-color: #808000;
+        }
+
+</style>
+
+
+<div class="registration-container">
+
+    <div class="registration-title">
+        <h2>Customer Registration</h2>
+    </div>
+
+    <form asp-action="Insert_clk" method="post">
+
+        <div class="form-group">
+            <label>Customer Name</label>
+
+            <input type="text"
+                   asp-for="Cname"
+                   class="my-input" />
+
+            <span asp-validation-for="Cname"
+                  class="text-danger"></span>
+        </div>
+
+
+        <div class="form-group">
+            <label>Address</label>
+
+            <input type="text"
+                   asp-for="Caddr"
+                   class="my-input" />
+
+            <span asp-validation-for="Caddr"
+                  class="text-danger"></span>
+        </div>
+
+
+        <div class="form-group">
+            <label>Phone Number</label>
+
+            <input type="text"
+                   asp-for="Cphone"
+                   class="my-input" />
+
+            <span asp-validation-for="Cphone"
+                  class="text-danger"></span>
+        </div>
+
+
+        <div class="form-group">
+            <label>Email Id</label>
+
+            <input type="text"
+                   asp-for="Email"
+                   class="my-input" />
+
+            <span asp-validation-for="Email"
+                  class="text-danger"></span>
+        </div>
+
+
+        <div class="form-group">
+            <label>Registration Date</label>
+
+            <input type="text"
+                   asp-for="Date"
+                   class="my-input" />
+
+            <span asp-validation-for="Date"
+                  class="text-danger"></span>
+        </div>
+
+
+        <div class="form-group">
+            <label>Username</label>
+
+            <input type="text"
+                   asp-for="una"
+                   class="my-input" />
+
+            <span asp-validation-for="una"
+                  class="text-danger"></span>
+        </div>
+
+
+        <div class="form-group">
+            <label>Password</label>
+
+            <input type="password"
+                   asp-for="pw"
+                   class="my-input" />
+
+            <span asp-validation-for="pw"
+                  class="text-danger"></span>
+        </div>
+
+
+        <div class="form-group">
+            <label>Confirm Password</label>
+
+            <input type="password"
+                   asp-for="cpw"
+                   class="my-input" />
+
+            <span asp-validation-for="cpw"
+                  class="text-danger"></span>
+        </div>
+
+
+        <div class="form-group">
+            <input type="submit"
+                   value="Register"
+                   class="register-button" />
+        </div>
+
+    </form>
+
+</div>
+
+
+@if (!string.IsNullOrEmpty(Model?.customer_msg))
+{
+    <script>
+        alert('@Model.customer_msg');
+    </script>
+}
+```

@@ -1,0 +1,136 @@
+﻿
+@* @{
+    ViewData["Title"] = "Customer_Home";
+}
+ *@
+<div class="container mt-5">
+
+    <div class="text-center">
+        <h1 style="color:crimson">Welcome to Vehicle Service</h1>
+
+        <p class="lead">
+            <b>Customer Dashboard</b>
+        </p>
+        @* The key was keeping the parameter names consistent:
+
+        Customer_Pgload(int id) → use new { id = ... }
+        Booking_Pgload(int customerId) → use new { customerId = ... }
+        MyBookings(int customerId) → use new { customerId = ... } *@
+        <p>
+            Customer ID: <strong>@ViewBag.CustomerId</strong>
+        </p>
+        <h3 style="color:lightseagreen">Hi, @ViewBag.CustomerName!</h3>
+    </div>
+
+    <hr />
+
+    <div class="row mt-4">
+
+        <div class="col-md-4 mb-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h4>My Vehicles</h4>
+                    <p>View your registered vehicles.</p>
+
+                    <a href="@Url.Action("Vehicle_Pgload", "Vehicle", new { customerId = ViewBag.CustomerId })"
+                       class="btn btn-primary">
+                        My Vehicles
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-4 mb-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h4>Add Vehicle</h4>
+                    <p>Register a new vehicle.</p>
+
+                    <a href="@Url.Action("Vehicle_Add", "Vehicle", new { customerId = ViewBag.CustomerId })"
+                       class="btn btn-success">
+                        Add Vehicle
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-4 mb-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h4>Book Service</h4>
+                    <p>Book a service for your vehicle.</p>                   
+                        <a href="@Url.Action("Booking_Pgload", "Booking", new { customerId = ViewBag.CustomerId })"
+                       class="btn btn-warning">
+                        Book Service
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row mt-3">
+
+        <div class="col-md-4 mb-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h4>My Bookings</h4>
+                    <p>View your service bookings.</p>
+
+                    <a href="@Url.Action("MyBookings", "Booking",new { customerId = ViewBag.CustomerId })"
+                       class="btn btn-info">
+                        My Bookings
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-4 mb-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h4>My Bills</h4>
+                    <p>View your service bills.</p>
+
+                    <a href="@Url.Action("Customer_Bill", "Bill",new { customerId = ViewBag.CustomerId })"
+                       class="btn btn-dark">
+                        My Bills
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-4 mb-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h4>Logout</h4>
+                    <p>Logout from your account.</p>
+
+                    <a asp-controller="Customer_Login"
+                       asp-action="Login_Pgload"
+                       class="btn btn-danger">
+                        Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<style>
+    .lead{
+
+        color:blue;
+    }
+    h4{
+        color:brown;
+    }
+    p{
+        color:darkgoldenrod;
+    }
+</style>

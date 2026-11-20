@@ -1,0 +1,162 @@
+﻿@model Vehicle_Service.Models.Vehicle
+
+
+<h2>Add your Vehicle Details</h2>
+<form asp-action="Vehicle_Add" method="post">
+                        <!-- Customer ID is hidden -->
+                        <input type="hidden"
+                               asp-for="CustomerId"
+                               value="@ViewBag.CustomerId" />
+
+                        <div class="mb-3">
+                            <label asp-for="VehicleNumber"
+                                   class="form-label">
+                                Vehicle Number
+                            </label>
+
+                            <input asp-for="VehicleNumber"
+                                   class="form-control"
+                                   placeholder="Enter vehicle number" />
+
+                            <span asp-validation-for="VehicleNumber"
+                                  class="text-danger">
+                            </span>
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label asp-for="VehicleType"
+                                   class="form-label">
+                                Vehicle Type
+                            </label>
+
+                            <select asp-for="VehicleType"
+                                    class="form-control">
+
+                                <option value="">
+                                    -- Select Vehicle Type --
+                                </option>
+
+                                <option value="Car">
+                                    Car
+                                </option>
+
+                                <option value="Bike">
+                                    Bike
+                                </option>
+
+                                <option value="Scooter">
+                                    Scooter
+                                </option>
+
+                                <option value="Other">
+                                    Other
+                                </option>
+
+                            </select>
+
+                            <span asp-validation-for="VehicleType"
+                                  class="text-danger">
+                            </span>
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label asp-for="Brand"
+                                   class="form-label">
+                                Brand
+                            </label>
+
+                            <input asp-for="Brand"
+                                   class="form-control"
+                                   placeholder="Enter vehicle brand" />
+
+                            <span asp-validation-for="Brand"
+                                  class="text-danger">
+                            </span>
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label asp-for="Model"
+                                   class="form-label">
+                                Model
+                            </label>
+
+                            <input asp-for="Model"
+                                   class="form-control"
+                                   placeholder="Enter vehicle model" />
+
+                            <span asp-validation-for="Model"
+                                  class="text-danger">
+                            </span>
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label asp-for="FuelType"
+                                   class="form-label">
+                                Fuel Type
+                            </label>
+
+                            <select asp-for="FuelType"
+                                    class="form-control">
+
+                                <option value="">
+                                    -- Select Fuel Type --
+                                </option>
+
+                                <option value="Petrol">
+                                    Petrol
+                                </option>
+
+                                <option value="Diesel">
+                                    Diesel
+                                </option>
+
+                                <option value="Electric">
+                                    Electric
+                                </option>
+
+                                <option value="Hybrid">
+                                    Hybrid
+                                </option>
+
+                            </select>
+
+                            <span asp-validation-for="FuelType"
+                                  class="text-danger">
+                            </span>
+                        </div>
+
+
+                        <div class="text-center">
+
+                            <button type="submit"
+                                    class="btn btn-success">
+                                Add Vehicle
+           
+                            </button>
+                            
+                        <a href="@Url.Action("Vehicle_Pgload", "Vehicle", new { customerId = ViewBag.CustomerId })"
+                         class="btn btn-primary">
+                          My Vehicles
+                        </a>
+                            <a asp-controller="Customer_Home"
+                               asp-action="Customer_Pgload"
+                               asp-route-id="@ViewBag.CustomerId"
+                               class="btn btn-danger ms-2">
+                                Cancel
+                            </a>
+
+                        </div>
+
+                    </form>   
+
+
+@if (ViewBag.Message != null)
+{
+    <script>
+        alert("@ViewBag.Message");
+    </script>
+}

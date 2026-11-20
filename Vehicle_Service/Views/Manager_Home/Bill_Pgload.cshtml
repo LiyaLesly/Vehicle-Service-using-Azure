@@ -1,0 +1,95 @@
+﻿@model List<Vehicle_Service.Models.Booking>
+
+@{
+    ViewData["Title"] = "Generate Bills";
+}
+
+<div class="container mt-4">
+
+    <h2 class="text-center mb-4">GENERATE BILLS</h2>
+
+    @if (Model != null && Model.Count > 0)
+    {
+        <div class="table-responsive">
+
+            <table class="table table-bordered table-hover text-center">
+
+                <thead class="table-danger">
+                    <tr>
+                        <th>Booking ID</th>
+                        <th>Customer ID</th>
+                        <th>Customer Name</th>
+                        <th>Vehicle ID</th>
+                        <th>Booking Date</th>
+                        <th>Problem Description</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @foreach (var booking in Model)
+                    {
+                        <tr>
+                            <td>@booking.BookingId</td>
+                            <td>@booking.CustomerId</td>
+                            <td>@booking.CustomerName</td>
+                            <td>@booking.VehicleId</td>
+                            <td>@booking.BookingDate.ToString("dd-MM-yyyy")</td>
+                            <td>@booking.ProblemDescription</td>
+                            <td>@booking.Status</td>
+
+                            <td>
+                                @* Payment status will be checked here *@
+
+                                @if (booking.PaymentStatus == "Paid")
+                                {
+                                    <span class="badge bg-success">
+                                        Paid
+                                    </span>
+                                }
+                                else if (booking.PaymentStatus == "Unpaid")
+                                {
+                                    <span class="badge bg-warning text-dark">
+                                        Awaiting Payment
+                                    </span>
+                                }
+                                else
+                                {
+                                    <a asp-controller="Bill"
+                                       asp-action="GenerateBill"
+                                       asp-route-bookingId="@booking.BookingId"
+                                       asp-route-customerId="@booking.CustomerId"
+                                       class="btn btn-danger">
+                                        Generate Bill
+                                    </a>
+                                }
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info text-center">
+            No bookings available for billing.
+        </div>
+    }
+
+    <div class="text-center mt-4">
+
+        <a asp-controller="Manager_Home"
+           asp-action="Manager_Pgload"
+           class="btn btn-secondary">
+            BACK
+        </a>
+
+    </div>
+
+</div>

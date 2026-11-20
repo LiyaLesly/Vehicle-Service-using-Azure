@@ -1,0 +1,114 @@
+﻿@model Vehicle_Service.Models.Booking
+
+@{
+    ViewData["Title"] = "Book Service";
+}
+
+<div class="container mt-5">
+
+    <h2 class="text-center mb-4">ADD VEHICLE PROBLEM</h2>
+
+    <div class="card shadow p-4 mx-auto" style="max-width: 600px;">
+
+        <form asp-controller="Booking" asp-action="Booking_Add" method="post">
+
+            <!-- Customer ID -->
+            <input type="hidden"
+                   name="CustomerId"
+                   value="@ViewBag.CustomerId" />
+           
+
+            <!-- Booking Date -->
+            <div class="mb-3">
+                <label class="form-label">Booking Date</label>
+
+                <input type="text"
+                       class="form-control"
+                       value="@DateTime.Now.ToString("dd-MM-yyyy hh:mm tt")"
+                       readonly />
+            </div>
+
+            <!-- Vehicle ID -->
+            <div class="mb-3">
+                <label asp-for="VehicleId" class="form-label">
+                    Select Vehicle
+                </label>
+
+                <select asp-for="VehicleId"
+                        class="form-control">
+
+                    <option value="">-- SELECT VEHICLE --</option>
+
+                    @if (ViewBag.VehicleDetails != null)
+                    {
+                        foreach (var vehicle in ViewBag.VehicleDetails)
+                        {
+                            <option value="@vehicle.VehicleId">
+                                @vehicle.VehicleNumber - @vehicle.VehicleType - @vehicle.Model
+                            </option>
+                        }
+                    }
+
+                </select>
+
+                <span asp-validation-for="VehicleId"
+                      class="text-danger"></span>
+            </div>
+            <!-- Problem Description -->
+            <div class="mb-3">
+                <label asp-for="ProblemDescription"
+                       class="form-label">
+                    Problem Description
+                </label>
+
+                <textarea asp-for="ProblemDescription"
+                          class="form-control"
+                          rows="4"
+                          placeholder="Describe the problem with your vehicle"></textarea>
+
+                <span asp-validation-for="ProblemDescription"
+                      class="text-danger"></span>
+            </div>
+
+           
+            <!-- Status -->
+            <input type="hidden"
+                   name="Status"
+                   value="Pending" />
+
+            <div class="text-center">
+
+                <button type="submit"
+                        class="btn btn-success">
+                    Book Service
+                </button>
+               
+                <a href="@Url.Action("MyBookings", "Booking",new { customerId = ViewBag.CustomerId })"
+                   class="btn btn-info">
+                    My Bookings
+                </a>
+                <a href="@Url.Action("Customer_Pgload", "Customer_Home", new { id = ViewBag.CustomerId })"
+                   class="btn btn-danger">
+                    BACK
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+@if (Model?.msg != null)
+{
+    <script>
+        alert('@Model.msg');
+    </script>
+}
+
+@section Scripts
+{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

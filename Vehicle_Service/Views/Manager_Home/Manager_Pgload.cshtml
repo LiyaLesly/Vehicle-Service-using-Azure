@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "Service Manager";
+}
+
+<div class="container mt-4">
+
+    <h2 class="text-center">Service Manager Dashboard</h2>
+
+    <div class="row mt-5">
+
+        <div class="col-md-4">
+            <div class="card text-center p-4">
+                <h4>Manage Services</h4>
+                <p>Add, edit and delete vehicle services.</p>
+                <a asp-controller="Manager_Home"
+                   asp-action="Service_Pgload"
+                   class="btn btn-primary">
+                    Manage Services
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card text-center p-4">
+                <h4>Manage Bookings</h4>
+                <p>View and manage customer bookings.</p>
+                <a asp-controller="Manager_Home"
+                   asp-action="ManagerBooking_Pgload"
+                   class="btn btn-success">
+                    Manage Bookings
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card text-center p-4">
+                <h4>Generate Bills</h4>
+                <p>Generate and manage customer bills.</p>
+                <a asp-controller="Manager_Home"
+                   asp-action="Bill_Pgload"
+                   class="btn btn-danger">
+                    Manage Bills
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<style>
+    h4{
+        color:blue;
+    }
+    p{
+        color:cornflowerblue;
+    }
+</style>

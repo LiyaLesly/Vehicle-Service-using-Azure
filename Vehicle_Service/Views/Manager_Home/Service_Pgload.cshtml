@@ -1,0 +1,147 @@
+﻿@model Vehicle_Service.Models.Service
+
+@* @{
+    ViewData["Title"] = "Manage Services";
+}
+ *@
+<div class="container mt-4">
+
+    <h2 class="text-center mb-4">SERVICE MANAGER</h2>
+
+    <div class="card shadow p-4">
+
+        <h3 class="text-center mb-4">ADD NEW SERVICE</h3>
+
+        <form asp-action="Service_Pgload" method="post">
+
+            <div class="form-group mb-3">
+                <label asp-for="ServiceName" class="form-label">
+                    Service Name
+                </label>
+
+                <input asp-for="ServiceName"
+                       class="form-control"
+                       placeholder="Enter service name" />
+
+                <span asp-validation-for="ServiceName"
+                      class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group mb-3">
+                <label asp-for="desc" class="form-label">
+                    Description
+                </label>
+
+                <textarea asp-for="desc"
+                          class="form-control"
+                          rows="3"
+                          placeholder="Enter service description"></textarea>
+
+                <span asp-validation-for="desc"
+                      class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group mb-3">
+                <label asp-for="estimatedcost" class="form-label">
+                    Estimated Cost
+                </label>
+
+                <input asp-for="estimatedcost"
+                       type="number"
+                       step="0.01"
+                       class="form-control"
+                       placeholder="Enter estimated cost" />
+
+                 @* <span asp-validation-for="estimatedcost"
+                      class="text-danger"></span> *@
+            </div>
+
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">
+                    ADD SERVICE
+                </button>
+            </div>
+           
+        </form>
+
+    </div>
+    
+
+    <div class="mt-5">
+
+        <h3 class="text-center mb-4">AVAILABLE SERVICES</h3>
+
+        @if (ViewBag.ServiceDetails != null)
+        {
+            var services = ViewBag.ServiceDetails as List<Vehicle_Service.Models.Service>;
+
+            if (services != null && services.Count > 0)
+            {
+                <div class="table-responsive">
+
+                    <table class="table table-bordered table-hover text-center">
+
+                        <thead class="table-primary">
+
+                            <tr>
+                                <th>Service ID</th>
+                                <th>Service Name</th>
+                                <th>Description</th>
+                                <th>Estimated Cost</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (var service in services)
+                            {
+                                <tr>
+                                    <td>@service.ServiceId</td>
+
+                                    <td>@service.ServiceName</td>
+
+                                    <td>@service.desc</td>
+
+                                    <td>₹ @service.estimatedcost</td>
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-info text-center">
+                    No services available.
+                </div>
+            }
+        }
+        <a asp-controller="Manager_Home"
+           asp-action="Manager_Pgload"
+           class="btn btn-danger">
+            BACK
+        </a>
+
+    </div>
+
+</div>
+@if (TempData["Message"] != null)
+{
+    <script>
+        alert("@TempData["Message"]");
+    </script>
+}
+
+@* @section Scripts
+{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+} *@

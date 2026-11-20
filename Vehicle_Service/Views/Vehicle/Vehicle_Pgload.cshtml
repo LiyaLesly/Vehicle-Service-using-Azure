@@ -1,0 +1,58 @@
+﻿@model List<Vehicle_Service.Models.Vehicle>
+
+<div class="container mt-4">
+
+    <div class="card">
+
+        <div class="card-header">
+            <h3>My Vehicles</h3>
+        </div>
+
+        <div class="card-body">
+
+            @if (Model != null && Model.Count > 0)
+            {
+                <table class="table table-bordered table-striped">
+
+                    <thead class="table-info">
+                        <tr>
+                            <th>Vehicle ID</th>
+                            <th>Vehicle Number</th>
+                            <th>Vehicle Type</th>
+                            <th>Brand</th>
+                            <th>Model</th>
+                            <th>Fuel Type</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var vehicle in Model)
+                        {
+                            <tr>
+                                <td>@vehicle.VehicleId</td>
+                                <td>@vehicle.VehicleNumber</td>
+                                <td>@vehicle.VehicleType</td>
+                                <td>@vehicle.Brand</td>
+                                <td>@vehicle.Model</td>
+                                <td>@vehicle.FuelType</td>
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+            }
+            else
+            {
+                <p>No vehicles registered.</p>
+            }
+            <a href="@Url.Action("Vehicle_Add", "Vehicle", new { customerId = ViewBag.CustomerId })"
+               class="btn btn-primary">
+                Add Vehicle
+            </a>
+        </div>
+
+    </div>
+
+</div>

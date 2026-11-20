@@ -1,0 +1,79 @@
+﻿
+ 
+@model List<Vehicle_Service.Models.Booking>
+
+@* @{
+    ViewData["Title"] = "My Bookings";
+
+    var bookings =
+        ViewBag.BookingDetails as List<Booking>;
+} *@
+
+<div class="container mt-5">
+
+    <h2 class="text-center mb-4">MY BOOKINGS</h2>
+
+    @if (Model != null && Model.Count > 0)
+    {
+        <div class="table-responsive">
+
+            <table class="table table-bordered table-hover text-center">
+
+                <thead class="table-dark">
+                    <tr>
+                        <th>Booking ID</th>
+                        <th>Vehicle ID</th>
+                        <th>Booking Date</th>
+                        <th>Problem Description</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @foreach (var booking in Model)
+                    {
+                        <tr>
+                            <td>@booking.BookingId</td>
+
+                            <td>@booking.VehicleId</td>
+
+                            <td>
+                                @booking.BookingDate.ToString("dd-MM-yyyy hh:mm tt")
+                            </td>
+
+                            <td>
+                                @booking.ProblemDescription
+                            </td>
+
+                            <td>
+                                @booking.Status
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+            
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info text-center">
+            You have no bookings yet.
+        </div>
+    }
+   
+    <div class="text-center mt-4">
+        <a href="@Url.Action("Booking_Pgload", "Booking",new { customerId = ViewBag.CustomerId })"
+           class="btn btn-warning">
+            Book Service
+        </a>
+        <a href="@Url.Action("Customer_Pgload", "Customer_Home", new { id = ViewBag.CustomerId })"
+           class="btn btn-success">
+            BACK TO DASHBOARD
+        </a>
+    </div>
+
+</div>

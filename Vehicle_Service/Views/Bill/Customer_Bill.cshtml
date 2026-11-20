@@ -1,0 +1,87 @@
+﻿@model List<Vehicle_Service.Models.Bill>
+
+<div class="container mt-4">
+
+    <h2 class="text-center mb-4">MY BILLS</h2>
+
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-info text-center">
+            @TempData["Message"]
+        </div>
+    }
+
+    @if (Model != null && Model.Count > 0)
+    {
+        <table class="table table-bordered text-center">
+
+            <thead class="table-dark">
+                <tr>
+                    <th>Bill ID</th>
+                    <th>Booking ID</th>
+                    <th>Bill Date</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var bill in Model)
+                {
+                    <tr>
+                        <td>@bill.BillId</td>
+                        <td>@bill.BookingId</td>
+                        <td>@bill.Billdate.ToString("dd-MM-yyyy")</td>
+                        <td>₹@bill.totalamount</td>
+                        <td>@bill.status</td>
+
+                        <td>
+                            @if (bill.status == "Pending")
+                            {
+                                <form asp-controller="Bill"
+                                      asp-action="PayBill"
+                                      method="post">
+
+                                    @Html.AntiForgeryToken()
+
+                                    <input type="hidden"
+                                           name="billId"
+                                           value="@bill.BillId" />
+
+                                    <button type="submit"
+                                            class="btn btn-success">
+                                        Pay Now
+                                    </button>
+                                </form>
+                            }
+                            else
+                            {
+                                <span class="text-success">
+                                    Paid
+                                </span>
+                            }
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+        <div class="text-end mt-3">
+            <h4>
+                TOTAL AMOUNT:
+                ₹@Model.Sum(x => x.totalamount)
+            </h4>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info text-center">
+            No bills available.
+        </div>
+    }
+
+</div>
