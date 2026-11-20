@@ -1,6 +1,6 @@
 # Vehicle Service
 
-A vehicle service booking system built with ASP.NET Core (.NET 8). Customers register vehicles, book services and view bills. When a booking is created, a confirmation email is sent through **Azure Service Bus** and **Azure Communication Services (ACS) Email**.
+A vehicle service booking system built with ASP.NET Core (.NET 8). Customers register vehicles, book services and view and pay bills. When a booking is created, a confirmation email is sent through **Azure Service Bus** and **Azure Communication Services (ACS) Email**.
 
 This project was migrated from an AWS-style messaging setup (SQS/SES) to Azure.
 
@@ -45,6 +45,15 @@ Customer -> Vehicle_Service (MVC web app)
 - An Azure subscription with:
   - a Service Bus namespace and a queue named `booking-queue`
   - a Communication Service connected to an Email Communication Service and domain
+    
+## Learning Objectives
+
+Understanding Azure Service Bus
+Creating and configuring Azure resources
+Integrating Azure services with .NET
+Building a Background Worker Service
+Understanding asynchronous message processing
+Sending email using Azure Communication Services
 
 ## Configuration
 
@@ -126,3 +135,8 @@ You can also test the API alone at `https://localhost:7097/swagger`: call `POST 
 ## Security
 
 Never commit connection strings, access keys, or the JWT signing key. If a key is exposed, regenerate it in the Azure portal immediately.
+
+## Author
+
+Liya Lesly
+.NET Developer | Learning Azure Cloud Integration
